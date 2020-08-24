@@ -12,10 +12,12 @@ dataframe = pd.read_excel(r'C:\Users\Dell\Desktop\Rooster Logic\GVMP_trial\GVMP.
 dataframe.index = pd.to_datetime(dataframe.index)
 returns_daily = dataframe.pct_change()
 returns_daily=returns_daily.dropna()
-returns_annual = returns_daily.mean() * len(returns_daily.columns)
+returns_annual = returns_daily.mean() #mean of daily returns
+std_of_each_anual = returns_daily.std()
+variance_of_each_annual = std_of_each_anual**2
 number_of_days = len(returns_daily['M&M'])
 cov_daily=returns_daily.cov()
-cov_annual = cov_daily * len(returns_daily.columns)
+cov_annual = cov_daily * len(returns_daily)
 port_returns = []
 port_volatility = []
 stock_weights = []
@@ -41,3 +43,4 @@ df = df[column_order]
 min_volatility = df['Volatility'].min()
 min_variance_port = df.loc[df['Volatility'] == min_volatility]
 
+#this file is exactly as sir sent. The only difference is that sir's file has it in % and this is absolute
